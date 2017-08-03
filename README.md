@@ -1,4 +1,4 @@
-[![Docker Build Statu](https://img.shields.io/docker/build/42BV/docker-mailhog.svg)](https://hub.docker.com/r/42BV/docker-mailhog/builds/) ![Docker Stars](https://img.shields.io/docker/stars/42BV/docker-mailhog.svg) [![Docker Pulls](https://img.shields.io/docker/pulls/42BV/docker-mailhog.svg)](https://hub.docker.com/r/42BV/docker-mailhog/) 
+[![Docker Build Statu](https://img.shields.io/docker/build/42bv/mailhog.svg)](https://hub.docker.com/r/42BV/docker-mailhog/builds/) ![Docker Stars](https://img.shields.io/docker/stars/42bv/mailhog.svg) [![Docker Pulls](https://img.shields.io/docker/pulls/42bv/mailhog.svg)](https://hub.docker.com/r/42BV/mailhog/) 
 
 [![MailHog](https://github.com/42BV/docker-mailhog/blob/master/logo.png?raw=true)](https://github.com/mailhog/MailHog) 
 
@@ -8,7 +8,6 @@
 
 ## Supported tags and Dockerfile
 
-- `develop` ([Dockerfile](https://raw.githubusercontent.com/42BV/docker-mailhog/develop/Dockerfile))
 - `latest`
 
 
@@ -26,7 +25,7 @@ Build the current Dockerfile  and tag the image:
 docker build -t mailhog .
 ```
 
-Build with a specific environment variable, for example SMTP_PORT:   
+Build with a specific environment variable, for example STORAGE:   
 ```
 docker build --build-arg STORAGE=memory -t mailhog .
 ```
@@ -35,7 +34,7 @@ docker build --build-arg STORAGE=memory -t mailhog .
   
 Run with default settings:
 ```
-docker run -d -p 587:587 -p 8025:8025 --name mailhog 42bv/mailhog
+docker run --rm -d -p 587:587 -p 8025:8025 --name mailhog 42bv/mailhog
 ```
 
 Run with volume mounted: 
