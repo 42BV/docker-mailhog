@@ -84,12 +84,31 @@ Hello there!
 EOF
 ```
 
+### REST API
+
+See the REST API documentation for more info.
+
+* [APIv2](https://github.com/mailhog/MailHog/blob/master/docs/APIv2.md)
+* [APIv1](https://github.com/mailhog/MailHog/blob/master/docs/APIv1.md)
+
+#### Curl
+
+Search messages for containing a string, for example "Hello":
+```
+curl -X "GET" http://localhost:8025/api/v2/search?kind=containing&query=Hello 
+```
+
+Delete all Messages:
+```
+curl -X "DELETE" http://localhost:8025/api/v1/messages
+```
+
 ### Project Integration
 
 Configure your application to use MailHog for SMTP delivery.
 
 | Property  | Value     | Note     |
-|:--------- |:--------- | -------- |
+|:--------- |:--------- | :------- |
 | HOSTNAME  | localhost | required |
 | PORT      | 587       | required |
 | USERNAME  |           | ignored  |
