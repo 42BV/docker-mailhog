@@ -16,30 +16,30 @@
 
 Get the latest version:
 ```
-docker pull 42bv/docker-mailhog:latest
+docker pull 42bv/mailhog:latest
 ```
 
 ## Build  
 
 Build the current Dockerfile  and tag the image:   
 ```
-docker build -t docker-mailhog .
+docker build -t mailhog .
 ```
 
 Build with a specific environment variable, for example SMTP_PORT:   
 ```
-docker build --build-arg STORAGE=memory -t docker-mailhog .
+docker build --build-arg STORAGE=memory -t mailhog .
 ```
 
 ## Run
   
 Run with default settings:
 ```
-docker run -d -p 587:587 -p 8025:8025 --name mailhog 42bv/docker-mailhog
+docker run -d -p 587:587 -p 8025:8025 --name mailhog 42bv/mailhog
 ```
 
 Run with volume mounted: 
 ```
-docker run -d -p 587:587 -p 8025:8025 -v $PWD/Maildir:/srv/Maildir --name mailhog 42bv/docker-mailhog
+docker run -d -p 587:587 -p 8025:8025 -v $PWD/Maildir:/srv/Maildir --name mailhog 42bv/mailhog
 ```
 
