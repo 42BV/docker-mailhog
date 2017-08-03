@@ -105,6 +105,8 @@ curl -X "DELETE" http://localhost:8025/api/v1/messages
 
 ### Project Integration
 
+#### Configuration
+
 Configure your application to use MailHog for SMTP delivery.
 
 | Property  | Value     | Note     |
@@ -116,6 +118,9 @@ Configure your application to use MailHog for SMTP delivery.
 | TLS       |           | ignored  |
 | SSL       |           | ignored  |
 
+#### Libraries
+
+* [APIv2 library for NodeJS](https://github.com/blueimp/mailhog-node)
 
 ---
 
@@ -123,3 +128,7 @@ Configure your application to use MailHog for SMTP delivery.
 
 * No SSL or TLS support yet
 * No Java client yet
+
+## License
+
+Released under the [MIT license](https://github.com/42BV/docker-mailhog/blob/master/LICENSE.md).
