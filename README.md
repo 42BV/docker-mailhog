@@ -122,12 +122,12 @@ Configure your application to use MailHog for SMTP delivery.
 
 * [APIv2 library for NodeJS](https://github.com/blueimp/mailhog-node)
 
----
-
 ### Issues and limitations
 
 * No SSL or TLS support yet
 * No Java client yet
+
+---
 
 ## License
 
