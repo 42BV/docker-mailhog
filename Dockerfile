@@ -8,7 +8,7 @@ ARG API_PORT=8025
 ARG UI_PORT=8025
 ARG STORAGE="maildir"
 
-# Configure Mailhog
+# Configure MailHog
 ENV MH_HOSTNAME="${HOSTNAME}" \
     MH_SMTP_BIND_ADDR="0.0.0.0:${SMTP_PORT}" \
     MH_API_BIND_ADDR="0.0.0.0:${API_PORT}" \
@@ -19,8 +19,11 @@ ENV MH_HOSTNAME="${HOSTNAME}" \
 # Install dependencies
 RUN apk --no-cache add git
 
-# Build MailHog from source
+# Build and install aMailHog from source
 RUN go get github.com/mailhog/MailHog
+
+# Build and install mhsendmail
+RUN go get github.com/mailhog/mhsendmail
 
 # Expose Maildir volume
 RUN mkdir -p /srv/Maildir;
@@ -29,5 +32,5 @@ VOLUME /srv/Maildir
 # Expose the SMTP (587) and HTTP (8025) ports:
 EXPOSE 587 8025
 
-# Start Mailhog server
+# Start MailHog server
 ENTRYPOINT ["MailHog"]

@@ -4,7 +4,13 @@
 
 # Docker - MailHog
 
+The populair [MailHog](https://github.com/mailhog/MailHog) smtp server with a REST API and Web UI in a Docker container.
+
+- [mhsendmail](https://github.com/mailhog/mhsendmail) is included for sending test mails.
+- Optional save the messages to disk.
 - Based on the official [golang:alpine](https://hub.docker.com/_/golang/) image.
+
+---
 
 ## Supported tags and Dockerfile
 
@@ -19,6 +25,12 @@ docker pull 42bv/mailhog:latest
 ```
 
 ## Build  
+
+Clone the repository:
+```
+git clone git@github.com:42BV/docker-mailhog.git
+cd docker-mailhog
+```
 
 Build the current Dockerfile  and tag the image:   
 ```
@@ -37,8 +49,58 @@ Run with default settings:
 docker run --rm -d -p 587:587 -p 8025:8025 --name mailhog 42bv/mailhog
 ```
 
-Run with volume mounted: 
+Run with volume mounted to save messages to disk in Maildir format: 
 ```
 docker run -d -p 587:587 -p 8025:8025 -v $PWD/Maildir:/srv/Maildir --name mailhog 42bv/mailhog
 ```
 
+---
+
+## Usage
+
+### MailHog UI
+
+#### Default
+Once the container is running you can access the web UI at [http://localhost:8025](http://localhost:8025). 
+
+#### Customize
+You can change the mapped port by running the container with `-p 8000:8025` instead, or by building the Dockerfile with the `--build-arg UI_PORT=8000` for example.
+
+### Sending mails
+
+#### mhsendmail
+
+A sendmail replacement which forwards mail to an SMTP server. This tool is include in the Docker image. 
+
+Use mhsendmail for sending test mails to your running MailHog instance:
+
+```
+docker exec -i mailhog mhsendmail --smtp-addr="localhost:587" <<EOF 
+From: Me <me@example.com>
+To: You <you@example.com>
+Subject: Test Message
+
+Hello there!
+EOF
+```
+
+### Project Integration
+
+Configure your application to use MailHog for SMTP delivery.
+
+| Property  | Value     | Note     |
+|:--------- |:--------- | -------- |
+| HOSTNAME  | localhost | required |
+| PORT      | 587       | required |
+| USERNAME  |           | ignored  |
+| PASSWORD  |           | ignored  |
+| TLS       |           | ignored  |
+| SSL       |           | ignored  |
+
+
+---
+
+### Issues and limitations
+
+* No SSL or TLS support yet
+* No Java client yet
