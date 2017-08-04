@@ -1,4 +1,4 @@
-[![Docker Build Statu](https://img.shields.io/docker/build/42bv/mailhog.svg)](https://hub.docker.com/r/42bv/docker-mailhog/builds/) ![Docker Stars](https://img.shields.io/docker/stars/42bv/mailhog.svg) [![Docker Pulls](https://img.shields.io/docker/pulls/42bv/mailhog.svg)](https://hub.docker.com/r/42bv/mailhog/) 
+[![Docker Build Statu](https://img.shields.io/docker/build/42bv/mailhog.svg)](https://hub.docker.com/r/42bv/mailhog/builds/) ![Docker Stars](https://img.shields.io/docker/stars/42bv/mailhog.svg) [![Docker Pulls](https://img.shields.io/docker/pulls/42bv/mailhog.svg)](https://hub.docker.com/r/42bv/mailhog/) 
 
 [![MailHog](https://github.com/42BV/docker-mailhog/blob/master/logo.png?raw=true)](https://github.com/mailhog/MailHog) 
 
@@ -54,7 +54,13 @@ Run with volume mounted to save messages to disk in Maildir format:
 docker run -d -p 587:587 -p 8025:8025 -v $PWD/Maildir:/srv/Maildir --name mailhog 42bv/mailhog
 ```
 
-## Production
+---
+
+## Deployment
+
+For a production deployment you probably want to utilize a supervisor process to monitor the Docker container. 
+
+For a standalone installation, one of the most simple solutions is to use [systemd](https://www.freedesktop.org/wiki/Software/systemd/), which comes pre-installed with most modern Linux installations.
 
 #### Requirements
 
