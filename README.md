@@ -54,6 +54,50 @@ Run with volume mounted to save messages to disk in Maildir format:
 docker run -d -p 587:587 -p 8025:8025 -v $PWD/Maildir:/srv/Maildir --name mailhog 42bv/mailhog
 ```
 
+## Production
+
+#### Requirements
+
+* systemd
+* docker
+
+#### Installation
+
+Place the systemd unit `mailhog.service` file in `/etc/systemd/system/`
+```
+[Unit]
+Description=MailHog
+BindsTo==docker.service
+After=docker.service
+Documentation="https://github.com/42BV/docker-mailhog"
+
+[Service]
+Restart=always
+RestartSec=3
+ExecStartPre=-/usr/bin/docker rm -f mailhog
+ExecStart=/usr/bin/docker run --rm -p 587:587 -p 8025:8025 --name mailhog 42bv/mailhog:latest
+ExecStop=-/usr/bin/docker stop mailhog
+ExecStopPost=-/usr/bin/docker rm -f mailhog
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Reload systemd, scanning for new or changed units:
+```
+systemctl daemon-reload
+```
+
+Start a unit immediately:
+```
+systemctl start mailhog
+```
+
+Enable the service to be started on bootup:
+```
+systemctl enable mailhog
+```
+
 ---
 
 ## Usage

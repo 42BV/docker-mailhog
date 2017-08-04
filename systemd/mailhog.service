@@ -1,0 +1,19 @@
+[Unit]
+# https://www.freedesktop.org/software/systemd/man/systemd.unit.html#
+# Place this service file in /etc/systemd/system/
+Description=MailHog
+BindsTo==docker.service
+After=docker.service
+Documentation="https://github.com/42BV/docker-mailhog"
+
+[Service]
+# https://www.freedesktop.org/software/systemd/man/systemd.service.html
+Restart=always
+RestartSec=3
+ExecStartPre=-/usr/bin/docker rm -f mailhog
+ExecStart=/usr/bin/docker run --rm -p 587:587 -p 8025:8025 --name mailhog 42bv/mailhog:latest
+ExecStop=-/usr/bin/docker stop mailhog
+ExecStopPost=-/usr/bin/docker rm -f mailhog
+
+[Install]
+WantedBy=multi-user.target
